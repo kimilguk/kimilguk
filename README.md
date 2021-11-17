@@ -10,5 +10,5 @@
 - 원격 깃허브에 푸시(아래)
 ![ex_screenshot](./README/git05.jpg)
 - 깃허브 주소를 커밋설정에 붙여넣습니다. https://github.com/kimilguk/kimilguk.git
-
+- useToken 사용해서 로그인 후 푸시
 #### 1주차 1교시
