@@ -10,6 +10,6 @@
 ![ex_screenshot](./README/git04.jpg)
 - 원격 깃허브에 푸시(아래)
 ![ex_screenshot](./README/git05.jpg)
-- 깃허브 주소를 커밋설정에 붙여넣습니다. https://github.com/kimilguk/kimilguk.git
+- 깃허브 주소를 커밋설정에 붙여넣습니다(위). https://github.com/kimilguk/kimilguk.git
 - useToken 사용(안드로이드 스튜디오 로그인창에서 Generate 버튼 필요) 로그인 후 푸시처리 됩니다.
 ![ex_screenshot](./README/git06.jpg)
