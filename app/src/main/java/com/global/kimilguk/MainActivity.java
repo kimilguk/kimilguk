@@ -1,6 +1,9 @@
 package com.global.kimilguk;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Toast;
 
@@ -17,4 +20,16 @@ public class MainActivity extends AppCompatActivity {
     public void onClickBtnMethod(View view) {
         Toast.makeText(getApplicationContext(), "메서드 테스트 버튼이 눌렸습니다.", Toast.LENGTH_LONG).show();
     }
+
+    public void onClickBtnNaver(View view) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.naver.com"));
+        //intent.setData(Uri.parse("http://m.naver.com"));데이터를 보내는 다른 방식
+        startActivity(intent);
+    }
+
+    public void onClickBtnCamera(View view) {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivity(intent);
+    }
+
 }
