@@ -1,7 +1,7 @@
 ### 모바일 앱 개발 강의용 깃 소스 입니다.
 #### [1주차 3교시 바로가기](https://github.com/kimilguk/kimilguk/tree/MobileApp01_03)
 #### [1주차 2교시 바로가기](https://github.com/kimilguk/kimilguk/tree/MobileApp01_02)
-#### [1주차 1교시 바로가기](https://github.com/kimilguk/kimilguk/tree/master)
+#### [1주차 1교시 바로가기](https://github.com/kimilguk/kimilguk/tree/MobileApp01_01)
 - 깃허브 저장소 만들기(아래1-2-3단계)
 ![ex_screenshot](./README/git00.jpg)
 ![ex_screenshot](./README/git01.jpg)
