@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickBtnNaver(View view) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.naver.com"));
-        //intent.setData(Uri.parse("http://m.naver.com"));데이터를 보내는 다른 방식
         startActivity(intent);
     }
 
@@ -31,5 +30,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivity(intent);
     }
-
+    //실제 단말기 스마트폰에서 전화걸기 앱을 호출하시기 바랍니다.
+    public void onClickBtnTel(View view) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("tel:01081756075"));
+        startActivity(intent);
+    }
 }

@@ -54,4 +54,15 @@
         app:layout_constraintTop_toBottomOf="@+id/btnNaver"
         app:layout_constraintVertical_bias="0.311" />
 
+    <Button
+        android:id="@+id/btnTel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClickBtnTel"
+        android:text="전화걸기"
+        app:layout_constraintBottom_toTopOf="@+id/btnMethod"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
