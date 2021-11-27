@@ -1,5 +1,5 @@
 ### 모바일 앱 개발 강의용 깃 소스 입니다.
-#### 2주차 2교시 작업소스입니다.
+#### 2주차 3교시 작업소스입니다.
 - [모든 회차_교시별 소스 링크](https://github.com/kimilguk/kimilguk/branches/all)
 - 깃허브 저장소 만들기(아래1-2-3단계)
 ![ex_screenshot](./README/git00.jpg)
