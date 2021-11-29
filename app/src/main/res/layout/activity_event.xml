@@ -37,20 +37,6 @@
                 android:layout_height="wrap_content"
                 android:text="TextView" />
 
-            <Button
-                android:id="@+id/btnSaveState"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="상태유지버튼" />
-
-            <EditText
-                android:id="@+id/txtEditSaveState"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"
-                android:text="Name" />
         </LinearLayout>
     </ScrollView>
 

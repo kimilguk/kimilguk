@@ -2,20 +2,15 @@ package com.global.kimilguk;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class EventActivity extends AppCompatActivity {
     //클래스 멤버변수 선언
     TextView txtViewSaveState;
-    EditText txtEditSaveState;
-    Button btnSaveState;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,24 +18,6 @@ public class EventActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "onCreate 호출.", Toast.LENGTH_LONG).show();
         //클래스 객체 생성
         txtViewSaveState = findViewById(R.id.txtViewSaveState);
-        txtEditSaveState = findViewById(R.id.txtEditSaveState);
-        btnSaveState = findViewById(R.id.btnSaveState);
-        btnSaveState.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                txtViewSaveState.setText(txtEditSaveState.getText().toString());
-            }
-        });
-        if (savedInstanceState != null) {
-            String name = savedInstanceState.getString("name");
-            txtViewSaveState.setText(name);
-        }
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString("name", txtViewSaveState.getText().toString());
     }
 
     @Override
@@ -50,13 +27,6 @@ public class EventActivity extends AppCompatActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();//부모메소드 초기화
-        Toast.makeText(getApplicationContext(), "onDestroy 호출.", Toast.LENGTH_LONG).show();
-
     }
 
 }
