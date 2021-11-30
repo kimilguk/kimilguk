@@ -14,6 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Kimilguk">
         <activity
+            android:name=".DialogActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".EventActivity"
             android:exported="true">
             <intent-filter>
@@ -33,16 +42,16 @@
         </activity>
         <activity
             android:name=".FrameLayoutActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".TableLayoutActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".RelativeLayoutActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".LinearLayoutActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
