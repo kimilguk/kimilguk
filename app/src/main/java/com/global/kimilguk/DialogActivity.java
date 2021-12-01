@@ -73,8 +73,8 @@ public class DialogActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //막대 익명클래스로 코드구현(아래)
-                new Thread() {//스레드는 프로그램에서 별도의 다른 작업을 실행할때 사용
-                    //스레드 시작과 종료, 재시작에 대한 제어는 핸들러를 사용하는데, 과정 후반에 자세히 다룹니다.
+                new Thread() {//스레드는 프로그램에서 1개의 작업에 별도의 순서를 갖는 다른 작업을 실행할 때 사용
+                    //화면재생, 네트워크 통신 스레드 시작과 종료에 대한 제어는 핸들러를 사용하는데, 과정 후반에 자세히 다룹니다.
                     @Override
                     public void run() {
                         super.run();
