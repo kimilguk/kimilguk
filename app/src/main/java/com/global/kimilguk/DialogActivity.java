@@ -2,6 +2,7 @@ package com.global.kimilguk;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -30,6 +31,16 @@ public class DialogActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dialog);
+        Button btnBackActivity = findViewById(R.id.btnBackActivity);
+        btnBackActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();//객체 생성
+                intent.putExtra("name","김일국");//인텐트 객체에 name키 변수에 값을 부여
+                setResult(RESULT_OK, intent);//응답 보내기
+                finish();//현재 액티비티 종료(메모리에서 지움)
+            }
+        });
         btnToast = findViewById(R.id.btnToast);//실행 객체 만들기
         btnToast.setOnClickListener(new View.OnClickListener() {//익명클래스 사용 구현코드작성
             @Override
