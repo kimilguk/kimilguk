@@ -39,7 +39,6 @@ public class LifeCycleActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_CODE_DIALOG);
             }
         });
-
         //인텐트사용 객체 생성
         EditText txtIntentData = findViewById(R.id.txtIntentData);
         Button btnContracts = findViewById(R.id.btnContacts);
