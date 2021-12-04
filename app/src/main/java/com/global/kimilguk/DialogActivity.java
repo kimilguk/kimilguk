@@ -27,18 +27,26 @@ public class DialogActivity extends AppCompatActivity {
     ProgressBar progressBar;//프로그레스바 클래스변수
     Button btnProgressStart;
     int progress_percent = 0;//프로그레스바 진행율
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dialog);
+        //부가데이터 전달하기 코드 아래 3줄
+        Intent backIntent = getIntent();
+        String startCount = backIntent.getStringExtra("startCount");
+        Toast.makeText(this, "onCreate startCount: " + startCount, Toast.LENGTH_LONG).show();
         Button btnBackActivity = findViewById(R.id.btnBackActivity);
         btnBackActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();//객체 생성
+                Intent intent = new Intent(getBaseContext(),LifeCycleActivity.class);//객체 생성
                 intent.putExtra("name","김일국");//인텐트 객체에 name키 변수에 값을 부여
+                //플래그사용 코드 아래 1줄
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 setResult(RESULT_OK, intent);//응답 보내기
-                finish();//현재 액티비티 종료(메모리에서 지움)
+                startActivity(intent);//플래그사용 효과를 보기위해 추가
+                //finish();//현재 액티비티 종료(메모리에서 지움)
             }
         });
         btnToast = findViewById(R.id.btnToast);//실행 객체 만들기

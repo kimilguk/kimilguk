@@ -1,9 +1,11 @@
 package com.global.kimilguk;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -12,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class LifeCycleActivity extends AppCompatActivity {
     //클래스 멤버 변수
     static final int REQUEST_CODE_DIALOG = 101;
+    static int startCount = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +30,24 @@ public class LifeCycleActivity extends AppCompatActivity {
         btnDialogActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), DialogActivity.class);
+                Intent intent = new Intent(getBaseContext(), DialogActivity.class);
+                //플래그사용 코드 아래 2줄
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                //부가데이터 전달하기 코드 아래 2줄
+                intent.putExtra("startCount", String.valueOf(startCount));
+                startCount = startCount + 1;
                 startActivityForResult(intent, REQUEST_CODE_DIALOG);
+            }
+        });
+
+        //인텐트사용 객체 생성
+        EditText txtIntentData = findViewById(R.id.txtIntentData);
+        Button btnContracts = findViewById(R.id.btnContacts);
+        btnContracts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(txtIntentData.getText().toString()));
+                startActivity(intent);
             }
         });
     }
