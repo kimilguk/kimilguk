@@ -1,8 +1,10 @@
 package com.global.kimilguk;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -35,7 +37,7 @@ public class DialogActivity extends AppCompatActivity {
         //부가데이터 전달하기 코드 아래 3줄
         Intent backIntent = getIntent();
         String startCount = backIntent.getStringExtra("startCount");
-        Toast.makeText(this, "onCreate startCount: " + startCount, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "onCreate startCount: " + startCount, Toast.LENGTH_SHORT).show();
         Button btnBackActivity = findViewById(R.id.btnBackActivity);
         btnBackActivity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,5 +153,52 @@ public class DialogActivity extends AppCompatActivity {
         //다이얼로그 객체 생성 후 화면에 출력
         AlertDialog dialog = builder.create();//대화상자 객체생성
         dialog.show();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Toast.makeText(this, "onStart() 콜백", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Toast.makeText(this, "onStop() 콜백", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Toast.makeText(this, "onDestroy() 콜백", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Toast.makeText(this, "onPause() 콜백", Toast.LENGTH_SHORT).show();
+        //포즈시(뒤로가기 버튼클릭) sharedPreferences.xml 파일이름으로 저장
+        SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);//MODE_PRIVATE 은 xml 파일을 현재 앱에서만 사용한다고 명시
+        SharedPreferences.Editor editor = sharedPreferences.edit();//수정가능 객체로 변경
+        editor.putString("progress_percent", String.valueOf(progress_percent));//변수값지정
+        editor.commit();//실제 저장 명령어
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Toast.makeText(this, "onResume() 콜백", Toast.LENGTH_SHORT).show();
+        //실행시 sharedPreferences 에서 기존 진행 값을 불러옴
+        SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);//sharedPreferences.xml 객체 생성
+        if ((sharedPreferences != null) && (sharedPreferences.contains("progress_percent"))) {
+            progress_percent = Integer.parseInt(sharedPreferences.getString("progress_percent", ""));//Key 이름 progress_percent 에 해당하는 값을 불러와서 숫자 형으로 변환
+        }
+        Toast.makeText(this, "현재까지 진행된 진행률은: " + progress_percent, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Toast.makeText(this, "onRestart() 콜백", Toast.LENGTH_SHORT).show();
     }
 }

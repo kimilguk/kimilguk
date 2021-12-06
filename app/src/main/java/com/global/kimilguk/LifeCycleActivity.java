@@ -42,11 +42,13 @@ public class LifeCycleActivity extends AppCompatActivity {
         //인텐트사용 객체 생성
         EditText txtIntentData = findViewById(R.id.txtIntentData);
         Button btnContracts = findViewById(R.id.btnContacts);
-        btnContracts.setOnClickListener(new View.OnClickListener() {
+        btnContracts.setOnClickListener(new View.OnClickListener() {//전화번호부 띄우기
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(txtIntentData.getText().toString()));
                 startActivity(intent);
+                finish();//현재 액티비티 삭제(화면 종료) 이후 화면에서 뒤로 가기 버튼에서 보이지 않게 됨.
+                //주) 위 finish() 추가 후 다음에 실행시 현재 액티비티의 onCreate가 실행되지 않습니다. 스마트폰 전원을 재시작 하면, 정상실행됨.
             }
         });
     }
