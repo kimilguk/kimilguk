@@ -84,6 +84,7 @@ public class DialogActivity extends AppCompatActivity {
                 showMessage();
             }
         });
+
         //프로그레스 바 코딩 시작
         progressBar = findViewById(R.id.progressBar);
         progressBar.setIndeterminate(false);//수치로 프로그레스바를 표시할때
@@ -177,11 +178,12 @@ public class DialogActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         Toast.makeText(this, "onPause() 콜백", Toast.LENGTH_SHORT).show();
-        //포즈시(뒤로가기 버튼클릭) sharedPreferences.xml 파일이름으로 저장
+        //포즈시(뒤로가기 버튼클릭) sharedPreferences.xml 파일이름으로 저장,수정
         SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);//MODE_PRIVATE 은 xml 파일을 현재 앱에서만 사용한다고 명시
         SharedPreferences.Editor editor = sharedPreferences.edit();//수정가능 객체로 변경
         editor.putString("progress_percent", String.valueOf(progress_percent));//변수값지정
         editor.commit();//실제 저장 명령어
+        if(dialog != null) { dialog.dismiss(); }//SPINNER 회전 진행률 회전 시 발생된 에러 처리
     }
 
     @Override

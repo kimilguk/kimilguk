@@ -1,6 +1,8 @@
 package com.global.kimilguk;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +26,11 @@ public class LifeCycleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(),"버튼을 눌렀습니다.", Toast.LENGTH_LONG).show();
+                //sharedPreferences.xml 파일에서 모든 변수와 값 지우기
+                    SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.clear();
+                    editor.commit();
             }
         });
         Button btnDialogActivity = findViewById(R.id.btnDialogActivity);
