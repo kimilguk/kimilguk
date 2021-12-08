@@ -7,6 +7,7 @@
          location permissions for the "MyLocation" functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 앱에서 카메라장치를 사용하기 위한 퍼미션 -->
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -42,11 +43,6 @@
         <activity
             android:name=".LifeCycleActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".DialogActivity"
