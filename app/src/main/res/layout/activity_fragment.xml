@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".FragmentActivity">
+
+    <Button
+        android:id="@+id/btnFragment1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="프래그먼트1 불러오기" />
+
+    <Button
+        android:id="@+id/btnFragment2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="프래그먼트2 불러오기" />
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:name="com.global.kimilguk.Fragment2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+</LinearLayout>
