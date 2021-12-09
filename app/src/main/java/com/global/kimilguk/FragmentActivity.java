@@ -54,8 +54,8 @@ public class FragmentActivity extends AppCompatActivity {
             @Override //입력상자 리스너객체의 수정이벤트 메소드
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 // 키보드 내리기
-                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                inputMethodManager.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);//소프트키보드 객체만들기
+                inputMethodManager.hideSoftInputFromWindow(editText.getWindowToken(), 0);//현재 입력객체의 윈도우 객체정보(토큰)기준으로 숨김
                 Toast.makeText(getApplicationContext(),"입력된 검색어는: " + editText.getText(), Toast.LENGTH_SHORT).show();
                 return true;
             }
@@ -67,9 +67,9 @@ public class FragmentActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int selectedId = item.getItemId();
         switch(selectedId) {
-            /*case R.id.menu_search:
+            case R.id.menu_search:
                 Toast.makeText(this, "검색메뉴가 선택 되었습니다.", Toast.LENGTH_SHORT).show();
-                break;*/
+                break;
             case R.id.menu_settings:
                 Toast.makeText(this, "설정메뉴가 선택 되었습니다.", Toast.LENGTH_SHORT).show();
                 break;
