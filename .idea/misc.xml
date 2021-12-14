@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/AndroidStudioProjects/Kimilguk/app/src/main/res/drawable-anydpi/ic_menu.xml" value="0.26510416666666664" />
         <entry key="..\:/Android/AndroidStudioProjects/Kimilguk/app/src/main/res/drawable-mcc800/del.xml" value="0.36666666666666664" />
         <entry key="..\:/Android/AndroidStudioProjects/Kimilguk/app/src/main/res/drawable/finger_drawable.xml" value="0.36666666666666664" />
         <entry key="..\:/Android/AndroidStudioProjects/Kimilguk/app/src/main/res/drawable/gradiant_drawable.xml" value="0.36666666666666664" />
@@ -15,15 +16,19 @@
         <entry key="..\:/Android/AndroidStudioProjects/Kimilguk/app/src/main/res/layout/activity_life_cycle.xml" value="0.33" />
         <entry key="..\:/Android/AndroidStudioProjects/Kimilguk/app/src/main/res/layout/activity_linear_layout.xml" value="0.34512820512820513" />
         <entry key="..\:/Android/AndroidStudioProjects/Kimilguk/app/src/main/res/layout/activity_main.xml" value="0.35052083333333334" />
+        <entry key="..\:/Android/AndroidStudioProjects/Kimilguk/app/src/main/res/layout/activity_navigation_drawer.xml" value="0.24895833333333334" />
+        <entry key="..\:/Android/AndroidStudioProjects/Kimilguk/app/src/main/res/layout/activity_navigation_view.xml" value="0.24895833333333334" />
         <entry key="..\:/Android/AndroidStudioProjects/Kimilguk/app/src/main/res/layout/activity_relative_layout.xml" value="0.25" />
         <entry key="..\:/Android/AndroidStudioProjects/Kimilguk/app/src/main/res/layout/activity_scroll_view.xml" value="0.33" />
         <entry key="..\:/Android/AndroidStudioProjects/Kimilguk/app/src/main/res/layout/activity_table_layout.xml" value="0.34512820512820513" />
         <entry key="..\:/Android/AndroidStudioProjects/Kimilguk/app/src/main/res/layout/activity_top_menu.xml" value="0.25" />
         <entry key="..\:/Android/AndroidStudioProjects/Kimilguk/app/src/main/res/layout/activity_view_pager.xml" value="0.25416666666666665" />
+        <entry key="..\:/Android/AndroidStudioProjects/Kimilguk/app/src/main/res/layout/content_navigation_drawer.xml" value="0.24895833333333334" />
         <entry key="..\:/Android/AndroidStudioProjects/Kimilguk/app/src/main/res/layout/del.xml" value="0.23333333333333334" />
         <entry key="..\:/Android/AndroidStudioProjects/Kimilguk/app/src/main/res/layout/search_layout.xml" value="0.3138888888888889" />
         <entry key="..\:/Android/AndroidStudioProjects/Kimilguk/app/src/main/res/layout/toast_custom.xml" value="0.23333333333333334" />
         <entry key="..\:/Android/AndroidStudioProjects/Kimilguk/app/src/main/res/menu/menu_main.xml" value="0.3138888888888889" />
+        <entry key="..\:/Android/AndroidStudioProjects/Kimilguk/app/src/main/res/menu/navigation_drawer.xml" value="0.24895833333333334" />
       </map>
     </option>
   </component>
