@@ -10,9 +10,14 @@
     <uses-permission
         android:name="android.permission.ACCESS_FINE_LOCATION"
         tools:ignore="CoarseFineLocation" /> <!-- 앱에서 인터넷을 사용하기 위한 퍼미션 -->
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- 앱에서 카메라장치를 사용하기 위한 퍼미션 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 앱에서 카메라장치를 사용하기 위한 퍼미션 -->
     <uses-feature
         android:name="android.hardware.camera"
+        android:required="true" />
+    <!-- 앱에서 진동을 감지하기 위한 퍼미션 -->
+    <uses-feature
+        android:name="android.hardware.sensor.accelerometer"
         android:required="true" />
 
     <application
@@ -35,7 +40,12 @@
         <receiver
             android:name=".MyReceiver"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true">
+            <!-- 리시버가 여러개 일때 -->
+            <intent-filter>
+                <action android:name="shake.detector" />
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name=".ServiceActivity"

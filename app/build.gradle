@@ -39,4 +39,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     //FragmentContainerView 콤포넌트 모듈 추가(아래)
     implementation "androidx.fragment:fragment:1.2.0"
+    //흔들기 콤포넌트 모듈 추가(아래)
+    implementation 'com.github.safetysystemtechnology:android-shake-detector:v1.2'
 }
