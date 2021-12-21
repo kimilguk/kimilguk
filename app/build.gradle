@@ -41,4 +41,6 @@ dependencies {
     implementation "androidx.fragment:fragment:1.2.0"
     //흔들기 콤포넌트 모듈 추가(아래)
     implementation 'com.github.safetysystemtechnology:android-shake-detector:v1.2'
+    //위험권한 허용을 자동으로 처리함.
+    implementation 'com.github.pedroSG94:AutoPermissions:1.0.3'
 }
