@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.global.kimilguk">
+    package="com.global.kimilguk" >
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -10,12 +10,10 @@
     <uses-permission
         android:name="android.permission.ACCESS_FINE_LOCATION"
         tools:ignore="CoarseFineLocation" /> <!-- 앱에서 인터넷을 사용하기 위한 퍼미션 -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!-- 앱에서 카메라장치를 사용하기 위한 퍼미션 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 앱에서 카메라장치를 사용하기 위한 퍼미션 -->
     <uses-feature
         android:name="android.hardware.camera"
-        android:required="true" />
-    <!-- 앱에서 진동을 감지하기 위한 퍼미션 -->
+        android:required="true" /> <!-- 앱에서 진동을 감지하기 위한 퍼미션 -->
     <uses-feature
         android:name="android.hardware.sensor.accelerometer"
         android:required="true" />
@@ -26,21 +24,26 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Kimilguk">
+        android:theme="@style/Theme.Kimilguk" >
         <activity
-            android:name=".ReceiverActivity"
-            android:exported="true">
+            android:name=".RecyclerViewActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ReceiverActivity"
+            android:exported="true" >
+        </activity>
 
         <receiver
             android:name=".MyReceiver"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true" >
+
             <!-- 리시버가 여러개 일때 -->
             <intent-filter>
                 <action android:name="shake.detector" />
@@ -49,8 +52,7 @@
 
         <activity
             android:name=".ServiceActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
 
         <service
             android:name=".MyService"
