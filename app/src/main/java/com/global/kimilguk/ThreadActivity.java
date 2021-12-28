@@ -1,5 +1,6 @@
 package com.global.kimilguk;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,6 +17,7 @@ public class ThreadActivity extends AppCompatActivity {
     BackgroundThread thread;//이너 클래스 생성
     MainHandler handler;//핸들러 변수 선언
     Handler handler2 = new Handler();//Runnable 클래스용 핸들러
+    MyAsyncTask myAsyncTask;//클래스 멤버변수 선언
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,15 +29,40 @@ public class ThreadActivity extends AppCompatActivity {
         btnThreadStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                thread = new BackgroundThread();
-                thread.start();
+                //thread = new BackgroundThread();
+                //thread.start();
+                /*
+                AsyncTask.execute(new Runnable() {
+                    int value = 0;
+                    @Override
+                    public void run() {
+                        for(int i=0;i<100;i++) {
+                            try {
+                                Thread.sleep(1000);
+                                value++;//동일 코딩: value = value + 1; value += 1;
+                                handler2.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        txtThreadValue.setText("value 값: " + value);
+                                    }
+                                });
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                });
+                기존 AsyncTask.execute 주석처리 */
+                myAsyncTask = new MyAsyncTask();
+                myAsyncTask.execute();
             }
         });
         Button btnThreadStop = findViewById(R.id.btnThreadStop);
         btnThreadStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                thread.interrupt();
+                //thread.interrupt();//기존 스레드 정지 코드 주석처리
+                myAsyncTask.cancel(true);
             }
         });
     }
@@ -79,6 +106,31 @@ public class ThreadActivity extends AppCompatActivity {
             Bundle bundle = msg.getData();
             int value = bundle.getInt("value");
             txtThreadValue.setText("value 값: "+value);
+        }
+    }
+
+    private class MyAsyncTask extends AsyncTask {
+        int value = 0;//출력할 초기값
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            while(!isCancelled() && value<100) {
+                try {
+                    Thread.sleep(1000);
+                    value++;//동일 코딩: value = value + 1; value += 1;
+                    Log.d("스레드", "value 값: " + value);
+                    publishProgress(value);//onProgressUpdate() 메소드와 매칭
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Object[] values) {
+            super.onProgressUpdate(values);
+            //이전 슬라이드의 doInBackground 메소드에서 publishProgress(값)이 실시간으로 들어옴
+            txtThreadValue.setText("value 값: "+values[0]);//배열 이라서 [0] 첫번째 인덱스 값을 가져옴
         }
     }
 }
