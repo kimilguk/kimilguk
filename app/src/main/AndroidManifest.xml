@@ -26,7 +26,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Kimilguk">
         <activity
-            android:name=".ThreadActivity"
+            android:name=".SocketActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,12 +35,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SpinnerViewActivity"
+            android:name=".ThreadActivity"
             android:exported="true">
         </activity>
         <activity
-            android:name=".RecyclerViewActivity"
+            android:name=".SpinnerViewActivity"
             android:exported="true"></activity>
+        <activity
+            android:name=".RecyclerViewActivity"
+            android:exported="true" />
         <activity
             android:name=".ReceiverActivity"
             android:exported="true" />
