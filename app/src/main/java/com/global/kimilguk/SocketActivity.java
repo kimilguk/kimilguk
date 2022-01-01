@@ -67,7 +67,7 @@ public class SocketActivity extends AppCompatActivity {
     private void sendMessage(String sendData) {
         int portNumber = 5001;
         try {
-            Socket socket = new Socket("localhost", portNumber);//소켓 객체생성
+            Socket socket = new Socket("localhost", portNumber);//localhist 는 IP상수 127.0.0.1이다.,소켓 객체생성
             Log.d("sendMessage 메소드", "소켓 연결함.");
             ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());//클라이언트에서 서버로 보내는 스트림 출력저장 객체생성
             outputStream.writeObject(sendData+ " from 클라이언트");//서버로 데이터 전송시작
@@ -93,7 +93,7 @@ public class SocketActivity extends AppCompatActivity {
             ServerSocket serverSocket = new ServerSocket(portNumber);//서버객체생성
             Log.d("startServer 메소드", "서버 시작됨.");
             while (true) {
-                Socket socket = serverSocket.accept();//소켓에 연결된 클라이언트 객체생성
+                Socket socket = serverSocket.accept();//소켓에 연결된 클라이언트를 관리하는 대기상태의 객체생성
                 Log.d("startServer 메소드", "소켓 연결됨.");
                 InetAddress inetAddress = socket.getLocalAddress();//클라이언트 IP주소객체생성
                 int clientPort = socket.getPort();//소켓에 연결된 클라이언트 포트생성
