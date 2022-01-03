@@ -43,4 +43,8 @@ dependencies {
     implementation 'com.github.safetysystemtechnology:android-shake-detector:v1.2'
     //위험권한 허용을 자동으로 처리함.
     implementation 'com.github.pedroSG94:AutoPermissions:1.0.3'
+    //Http통신모듈인 볼리모듈 추가
+    implementation 'com.android.volley:volley:1.2.0'
+    //JSON객체를 자바객체로 파싱하는 Gson모듈 추가
+    implementation 'com.google.code.gson:gson:2.8.6'
 }
