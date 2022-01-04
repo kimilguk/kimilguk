@@ -1,27 +1,34 @@
 package com.global.kimilguk;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 
-import javax.net.ssl.HttpsURLConnection;
+import java.util.ArrayList;
 
 public class HttpActivity extends AppCompatActivity {
     //멤버변수 선언
     EditText txtHttpUrl;
     Button btnRequest;
-    TextView txtResponse;
-    Handler handler = new Handler();//스레드에서 UI 업데이트용
+    //TextView txtResponse;//기존코딩 제거 후 아래라인 추가
+    RecyclerView movieRecycler;
+    //Handler handler = new Handler();//스레드에서 UI 업데이트용 사용안함.
+    static RequestQueue requestQueue;
+    MovieAdapter movieAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,50 +36,59 @@ public class HttpActivity extends AppCompatActivity {
         //객체 생성
         txtHttpUrl = findViewById(R.id.txtHttpUrl);
         btnRequest = findViewById(R.id.btnRequest);
-        txtResponse = findViewById(R.id.txtResponse);
+        //txtResponse = findViewById(R.id.txtResponse);//기존코딩 제거 후 아래라인 추가
+        movieRecycler = findViewById(R.id.movieRecycler);
         btnRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        request(txtHttpUrl.getText().toString());//외부 메소드 생성
-                    }
-                }).start();
+                //기존 스레드 코딩 제거 후 아래 request() 메소드 제거
+                makeRequest();//신규 외부 메소드 추가
             }
         });
+        if(requestQueue == null) {
+            requestQueue = Volley.newRequestQueue(getApplicationContext());//새로운 스레드 생성
+        }
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);//레이아웃 설정 객체생성,역순정렬사용안함
+        movieRecycler.setLayoutManager(layoutManager);//리사이클러 뷰 설정적용
+        movieAdapter = new MovieAdapter();//어댑터 객체 생성
+        movieRecycler.setAdapter(movieAdapter);//리사이클러와 어댑터 바인딩 후 출력.
     }
 
-    private void request(String toString) {
-        StringBuilder stringBuilder = new StringBuilder();//데이터 수신 객체로 사용
-        try {
-            URL url = new URL(toString);
-            HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();//객체 생성
-            if(urlConnection != null) {
-                urlConnection.setConnectTimeout(1000);
-                urlConnection.setRequestMethod("GET");
-                urlConnection.setDoInput(true);
-                int resCode = urlConnection.getResponseCode();//응답 코드 저장
-                BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));//입력 데이터를 받기 위한 객체 생성
-                String line = null;
-                while(true) {
-                    line = reader.readLine();
-                    if(line == null) {//입력데이터가 없으면 반복문 종료
-                        break;
-                    }
-                    stringBuilder.append(line + "\n");
-                }
-                reader.close();//객제 삭제
-                urlConnection.disconnect();//객체 삭제
-                handler.post(new Runnable() {
+    private void makeRequest() {
+        String url = txtHttpUrl.getText().toString();
+        StringRequest request = new StringRequest(//웹 요청 객체추가(스레드)
+                //볼리 사용시작
+                Request.Method.GET,
+                url,
+                new Response.Listener<String>() {
                     @Override
-                    public void run() {
-                        txtResponse.setText(stringBuilder.toString());
+                    public void onResponse(String response) {
+                        Gson gson = new Gson();//Gson사용시작
+                        //데이터구조 확인: boxOfficeResult { {boxofficeType, showRange ,dailyBoxOfficeList} }
+                        MovieList movieList = gson.fromJson(response, MovieList.class);//Json구조와 같은 자료클래스제작
+                        for (int i = 0; i < movieList.boxOfficeResult.dailyBoxOfficeList.size(); i++) {
+                            MovieVO movieVO = movieList.boxOfficeResult.dailyBoxOfficeList.get(i);
+                            movieAdapter.addItem(movieVO);
+                        }
+                        movieAdapter.notifyDataSetChanged();//재 접속시 화면UI에 업데이트 적용
                     }
-                });
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "서버로 부터 응답이 없습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        request.setShouldCache(false);//요청 객세 실행시 캐시 사용않함.항상새로고침
+        requestQueue.add(request);//요청 스레드 시작
+    }
+    //Json 데이터 구조와 같은 클래스 구조 만들기 시작
+    private class MovieList {
+        MovieListResult boxOfficeResult;
+    }
+
+    private class MovieListResult {
+        ArrayList<MovieVO> dailyBoxOfficeList = new ArrayList<MovieVO>();
     }
 }
