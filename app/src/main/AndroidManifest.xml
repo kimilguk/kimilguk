@@ -27,7 +27,7 @@
         android:theme="@style/Theme.Kimilguk"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".HttpActivity"
+            android:name=".DatabaseActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,12 +36,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SocketActivity"
+            android:name=".HttpActivity"
             android:exported="true">
         </activity>
         <activity
-            android:name=".ThreadActivity"
+            android:name=".SocketActivity"
             android:exported="true"></activity>
+        <activity
+            android:name=".ThreadActivity"
+            android:exported="true" />
         <activity
             android:name=".SpinnerViewActivity"
             android:exported="true" />

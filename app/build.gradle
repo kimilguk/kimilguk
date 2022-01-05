@@ -47,4 +47,9 @@ dependencies {
     implementation 'com.android.volley:volley:1.2.0'
     //JSON객체를 자바객체로 파싱하는 Gson모듈 추가
     implementation 'com.google.code.gson:gson:2.8.6'
+    //SQLite 데이터베이스 내용 디버그 모듈
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
+    //윈도우 명령프롬프트 에서 아래 포트 권한 추가
+    //C:\Nox\bin>nox_adb forward tcp:8080 tcp:8080
+
 }
