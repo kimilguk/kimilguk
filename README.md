@@ -1,7 +1,9 @@
 ### 모바일 앱 개발 강의용 깃 소스 입니다.
 #### 9주차 3교시 작업소스 입니다.
-- [강의 모든 주차_교시별 강의용소스 링크](https://github.com/kimilguk/kimilguk/branches/all)
-- [출판사 저자소스:주의_강의용소스와 동일하지 않음](https://github.com/mike-jung/DoItAndroidRev8)
+- [교수의 모든 주차_교시별 강의용소스 링크](https://github.com/kimilguk/kimilguk/branches/all)
+- [출판사의 저자소스:주의_강의용소스와 동일하지 않음](https://github.com/mike-jung/DoItAndroidRev8)
+
+#### 아래항목은 필요한 학생만 선택해서 하세요
 - 깃허브 저장소 만들기(아래1-2-3단계)
 ![ex_screenshot](./README/git00.jpg)
 ![ex_screenshot](./README/git01.jpg)
