@@ -50,6 +50,6 @@ dependencies {
     //SQLite 데이터베이스 내용 디버그 모듈
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
     //윈도우 명령프롬프트 에서 아래 포트 권한 추가
-    //C:\Nox\bin>nox_adb forward tcp:8080 tcp:8080
+    //C:\Nox\bin\nox_adb forward tcp:8080 tcp:8080
 
 }
