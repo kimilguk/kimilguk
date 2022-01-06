@@ -13,7 +13,7 @@ public class DatabaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database);
         //객체생성
-        database = openOrCreateDatabase("customer", MODE_PRIVATE, null);//db 객체생성
+        database = openOrCreateDatabase("customer.db", MODE_PRIVATE, null);//db 객체생성
         database.execSQL("create table if not exists customer (" +
                 "_id integer PRIMARY KEY autoincrement, " +
                 "name text, " +
