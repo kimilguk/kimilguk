@@ -16,7 +16,9 @@
         android:required="true" /> <!-- 앱에서 진동을 감지하기 위한 퍼미션 -->
     <uses-feature
         android:name="android.hardware.sensor.accelerometer"
-        android:required="true" />
+        android:required="true" /> <!-- SD카드=스토리지 접근 권한 추가 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -27,7 +29,7 @@
         android:theme="@style/Theme.Kimilguk"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".DatabaseActivity"
+            android:name=".ProviderActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,13 +37,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- 카메라 앱 사용시간에 캡쳐한 내용을 바로 불러올때 사용하게됨.
+        프로바이더 등록, xml폴더에 external.xml 파일 생성 -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.global.kimilguk.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/external" />
+        </provider>
+
         <activity
-            android:name=".HttpActivity"
+            android:name=".DatabaseActivity"
             android:exported="true">
         </activity>
         <activity
-            android:name=".SocketActivity"
+            android:name=".HttpActivity"
             android:exported="true"></activity>
+        <activity
+            android:name=".SocketActivity"
+            android:exported="true" />
         <activity
             android:name=".ThreadActivity"
             android:exported="true" />
