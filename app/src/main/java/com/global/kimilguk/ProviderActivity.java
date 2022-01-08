@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -30,9 +31,9 @@ public class ProviderActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_GET_CONTENT);//콘텐츠 불러오기 액션추가
+                intent.setAction(Intent.ACTION_GET_CONTENT);//콘텐츠 불러오기 인텐트액션추가
                 intent.setType("image/*");//콘텐츠타입을 image 로 제한하면, 앨범 앱을 띄운다.
-                startActivityForResult(intent, 101);//선택한 이미지를 가져오기위해          
+                startActivityForResult(intent, 101);//선택한 이미지를 가져오기위해 requestCode 추가
             }
         });
     }
@@ -43,6 +44,7 @@ public class ProviderActivity extends AppCompatActivity {
         if(requestCode == 101) {
             if(resultCode == RESULT_OK) {
                 Uri fileUri = data.getData();//앨범에서 선택한 파일명
+                Log.d("경로", "URI: " + String.valueOf(fileUri));
                 ContentResolver resolver = getContentResolver();//리졸버 객체생성
                 try {
                     //ContentResolver 객체의 openInputStream 메소드로 파일 읽어 들이기
