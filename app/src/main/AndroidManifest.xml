@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.global.kimilguk">
+    package="com.global.kimilguk" >
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -27,23 +27,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Kimilguk"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".CameraActivity"
+            android:exported="false" />
         <activity
             android:name=".ProviderActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- 카메라 앱 사용시간에 캡쳐한 내용을 바로 불러올때 사용하게됨.
-        프로바이더 등록, xml폴더에 external.xml 파일 생성 -->
+        <!--
+ 카메라 앱 사용시간에 캡쳐한 내용을 바로 불러올때 사용하게됨.
+        프로바이더 등록, xml폴더에 external.xml 파일 생성
+        -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.global.kimilguk.fileprovider"
             android:exported="false"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true" >
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/external" />
@@ -51,11 +56,10 @@
 
         <activity
             android:name=".DatabaseActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".HttpActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".SocketActivity"
             android:exported="true" />
@@ -75,7 +79,7 @@
         <receiver
             android:name=".MyReceiver"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true" >
 
             <!-- 리시버가 여러개 일때 -->
             <intent-filter>

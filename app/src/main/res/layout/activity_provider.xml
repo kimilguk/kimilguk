@@ -7,11 +7,32 @@
     android:orientation="vertical"
     tools:context=".ProviderActivity">
 
-    <Button
-        android:id="@+id/btnSelectImage"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="앨범에서 이미지 선택" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnSelectImage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="앨범에서 이미지 선택" />
+
+        <Button
+            android:id="@+id/btnCameraImage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="카메라 이미지 선택" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnUserCamera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="신규 카메라 앱" />
 
     <ImageView
         android:id="@+id/imgSelect"
