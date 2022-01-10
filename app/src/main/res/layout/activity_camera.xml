@@ -13,8 +13,11 @@
         android:layout_height="wrap_content"
         android:text="사진찍기" />
 
-    <SurfaceView
-        android:id="@+id/surfaceView"
+    <FrameLayout
+        android:id="@+id/surfaceFrame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
 </LinearLayout>
