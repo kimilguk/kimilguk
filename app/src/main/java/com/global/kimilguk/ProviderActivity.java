@@ -31,8 +31,18 @@ public class ProviderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_provider);
         //객체 생성
+        Button btnUserCamera = findViewById(R.id.btnUserCamera);
+        //신규 카메라 앱 띄우기
+        btnUserCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), CameraActivity.class);
+                startActivityForResult(intent, 103);
+            }
+        });
         Button btnSelectImage = findViewById(R.id.btnSelectImage);
         imgSelect = findViewById(R.id.imgSelect);
+        //앨범 앱 띄우기
         btnSelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,6 +53,7 @@ public class ProviderActivity extends AppCompatActivity {
             }
         });
         Button btnCameraImage = findViewById(R.id.btnCameraImage);
+        //내장 카메라 앱 띄우기
         btnCameraImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
