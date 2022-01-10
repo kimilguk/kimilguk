@@ -11,6 +11,7 @@
         android:name="android.permission.ACCESS_FINE_LOCATION"
         tools:ignore="CoarseFineLocation" /> <!-- 앱에서 인터넷을 사용하기 위한 퍼미션 -->
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 앱에서 카메라장치를 사용하기 위한 퍼미션 -->
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" /> <!-- 앱에서 진동을 감지하기 위한 퍼미션 -->
