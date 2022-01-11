@@ -52,7 +52,7 @@ public class CameraActivity extends AppCompatActivity {
                         }else{
                             //Uri outUri = Uri.parse(outUriStr);
                             //sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, outUri));
-                            //미디어스캐너 클라이언트 init
+                            //미디어스캐너 클라이언트 익명클래스 실행 API29 부터 위 브로드캐스트 대신에 사용해야함.
                             mMediaScannerClient = new MediaScannerConnection.MediaScannerConnectionClient(){
                                 @Override
                                 public void onMediaScannerConnected() {
