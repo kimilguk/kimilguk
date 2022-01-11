@@ -1,7 +1,9 @@
 package com.global.kimilguk;
 
+import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -15,6 +17,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
 import java.io.File;
@@ -30,6 +33,8 @@ public class ProviderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_provider);
+        //주,Android M마시멜로 6버전일때는 수동으로 카메라 권한을 줘야 한다. 누가 7버전 부터는 AutoPermissions 작동되기 때문에 필요없음.
+        ActivityCompat.requestPermissions(ProviderActivity.this,new String[]{Manifest.permission.CAMERA},0);
         //객체 생성
         Button btnUserCamera = findViewById(R.id.btnUserCamera);
         //신규 카메라 앱 띄우기
@@ -71,8 +76,8 @@ public class ProviderActivity extends AppCompatActivity {
                 }
                 if(Build.VERSION.SDK_INT >= 24) {//누가7.0버전이상
                     fileUri = FileProvider.getUriForFile(getApplicationContext(), "com.global.kimilguk.fileprovider", outFile);
-                }else{//구형버전 에서
-                    fileUri = Uri.fromFile(outFile);
+                }else{//구형버전 에서 에러나서 제외
+                    //fileUri = Uri.fromFile(outFile);
                 }
                 //인텐트로 카메라 앱 띄우기
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -86,6 +91,17 @@ public class ProviderActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 102 && resultCode == RESULT_OK) {
+            //주, 누가 7버전 미만에서는 작동하지 않기 때문에 추가 처리를 해 줘야 한다.
+            if(Build.VERSION.SDK_INT < 24) {
+                Uri selectedImage2 = data.getData();
+                String[] filePathColumn2 = {MediaStore.Images.Media.DATA};
+                Cursor cursor2 = getApplicationContext().getContentResolver().query(selectedImage2, filePathColumn2, null, null, null);
+                cursor2.moveToFirst();
+                int columnIndex2 = cursor2.getColumnIndex(filePathColumn2[0]);
+                String filePath = cursor2.getString(columnIndex2);
+                cursor2.close();
+                outFile = new File(filePath);
+            }
             BitmapFactory.Options options = new BitmapFactory.Options();//저장할 이미지옵션
             options.inSampleSize = 8;//이미지 크기를 1/2의8승으로 줄인다.
             Bitmap bitmap = BitmapFactory.decodeFile(outFile.getAbsolutePath(), options);//이미지가 저장된다

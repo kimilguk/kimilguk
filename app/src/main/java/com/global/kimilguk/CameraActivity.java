@@ -1,10 +1,10 @@
 package com.global.kimilguk;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -23,6 +23,8 @@ import java.io.IOException;
 public class CameraActivity extends AppCompatActivity {
     //멤버변수 선언
     CameraSurfaceView surfaceView;
+    MediaScannerConnection mediaScannerConnection = null;
+    MediaScannerConnection.MediaScannerConnectionClient mMediaScannerClient = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,8 +50,23 @@ public class CameraActivity extends AppCompatActivity {
                         if(outUriStr == null) {
                             Log.d("저장", "저장 에러");
                         }else{
-                            Uri outUri = Uri.parse(outUriStr);
-                            sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, outUri));
+                            //Uri outUri = Uri.parse(outUriStr);
+                            //sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, outUri));
+                            //미디어스캐너 클라이언트 init
+                            mMediaScannerClient = new MediaScannerConnection.MediaScannerConnectionClient(){
+                                @Override
+                                public void onMediaScannerConnected() {
+                                    mediaScannerConnection.scanFile( outUriStr, null);
+                                    //"미디어 스캔 성공"
+                                }
+                                @Override
+                                public void onScanCompleted(String path, Uri uri) {
+                                    //"미디어 스캔 연결 종료 처리 uri=" + uri
+                                    mediaScannerConnection.disconnect();
+                                }
+                            };
+                            mediaScannerConnection = new MediaScannerConnection(CameraActivity.this, mMediaScannerClient);
+                            mediaScannerConnection.connect();
                             Log.d("저장", "저장한 내용을 앨범 앱에 알려줌");
                         }
                         // 다시 미리보기 화면 보여줌
