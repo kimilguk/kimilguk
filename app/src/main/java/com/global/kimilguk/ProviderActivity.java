@@ -61,8 +61,8 @@ public class ProviderActivity extends AppCompatActivity {
                 }
                 if(Build.VERSION.SDK_INT >= 24) {//누가7.0버전이상
                     fileUri = FileProvider.getUriForFile(getApplicationContext(), "com.global.kimilguk.fileprovider", outFile);
-                }else{//구형버전 에서
-                    fileUri = Uri.fromFile(outFile);
+                }else{//구형버전 에서 에러나서 제외
+                    //fileUri = Uri.fromFile(outFile);
                 }
                 //인텐트로 카메라 앱 띄우기
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
