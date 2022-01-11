@@ -2,6 +2,7 @@ package com.global.kimilguk;
 
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -75,6 +76,17 @@ public class ProviderActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 102 && resultCode == RESULT_OK) {
+            //주, 누가 7버전 미만에서는 작동하지 않기 때문에 추가 처리를 해 줘야 한다.
+            if(Build.VERSION.SDK_INT < 24) {
+                Uri selectedImage2 = data.getData();
+                String[] filePathColumn2 = {MediaStore.Images.Media.DATA};
+                Cursor cursor2 = getApplicationContext().getContentResolver().query(selectedImage2, filePathColumn2, null, null, null);
+                cursor2.moveToFirst();
+                int columnIndex2 = cursor2.getColumnIndex(filePathColumn2[0]);
+                String filePath = cursor2.getString(columnIndex2);
+                cursor2.close();
+                outFile = new File(filePath);
+            }
             BitmapFactory.Options options = new BitmapFactory.Options();//저장할 이미지옵션
             options.inSampleSize = 8;//이미지 크기를 1/2의8승으로 줄인다.
             Bitmap bitmap = BitmapFactory.decodeFile(outFile.getAbsolutePath(), options);//이미지가 저장된다
