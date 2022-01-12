@@ -75,11 +75,15 @@ public class ProviderActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 102 && resultCode == RESULT_OK) {
-            Uri fileUri = data.getData();//카메라 앱에서 선택한 파일명
             ContentResolver resolver = getContentResolver();//리졸버 객체생성
             try {
                 //ContentResolver 객체의 openInputStream 메소드로 파일 읽어 들이기
-                InputStream inputStream = resolver.openInputStream(fileUri);
+                InputStream inputStream;
+                if(data.getData() != null) {
+                    inputStream = resolver.openInputStream(data.getData());//카메라 앱에서 선택한 파일명
+                }else{
+                    inputStream = resolver.openInputStream(fileUri);//파일프로바이더로 생성된 값
+                }
                 BitmapFactory.Options options = new BitmapFactory.Options();//저장할 이미지옵션
                 options.inSampleSize = 8;//이미지 크기를 1/2의8승으로 줄인다.
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream,null,options);//비트맵객체생성
