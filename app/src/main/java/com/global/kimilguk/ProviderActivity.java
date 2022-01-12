@@ -49,7 +49,9 @@ public class ProviderActivity extends AppCompatActivity {
                 try {
                     //ContentResolver 객체의 openInputStream 메소드로 파일 읽어 들이기
                     InputStream inputStream = resolver.openInputStream(fileUri);
-                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);//비트맵객체생성
+                    BitmapFactory.Options options = new BitmapFactory.Options();//저장할 이미지옵션
+                    options.inSampleSize = 8;//이미지 크기를 1/2의8승으로 줄인다.
+                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream,null,options);//비트맵객체생성
                     imgSelect.setImageBitmap(bitmap);//이미지 뷰에 비트맵 출력
                     inputStream.close();//객체 제거
                 } catch (IOException e) {
