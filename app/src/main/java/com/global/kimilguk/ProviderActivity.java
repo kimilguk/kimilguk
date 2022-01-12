@@ -75,7 +75,7 @@ public class ProviderActivity extends AppCompatActivity {
                 }
                 if(Build.VERSION.SDK_INT >= 24) {//누가7.0버전이상
                     fileUri = FileProvider.getUriForFile(getApplicationContext(), "com.global.kimilguk.fileprovider", outFile);
-                }else{//구형버전 에서 에러나서 수정
+                }else{//구형버전 에서 에러나서 제외
                     //fileUri = Uri.fromFile(outFile);
                 }
                 //인텐트로 카메라 앱 띄우기
@@ -90,11 +90,16 @@ public class ProviderActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 102 && resultCode == RESULT_OK) {
-            Uri fileUri = data.getData();//카메라 앱에서 선택한 파일명
+            Log.d("경로", "URI: " + data.getData());
             ContentResolver resolver = getContentResolver();//리졸버 객체생성
             try {
                 //ContentResolver 객체의 openInputStream 메소드로 파일 읽어 들이기
-                InputStream inputStream = resolver.openInputStream(fileUri);
+                InputStream inputStream;
+                if(data.getData() != null) {
+                    inputStream = resolver.openInputStream(data.getData());//카메라 앱에서 선택한 파일명
+                }else{
+                    inputStream = resolver.openInputStream(fileUri);//파일프로바이더로 생성된 값
+                }
                 BitmapFactory.Options options = new BitmapFactory.Options();//저장할 이미지옵션
                 options.inSampleSize = 8;//이미지 크기를 1/2의8승으로 줄인다.
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream,null,options);//비트맵객체생성
