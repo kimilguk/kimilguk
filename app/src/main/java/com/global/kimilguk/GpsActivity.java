@@ -33,7 +33,7 @@ public class GpsActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(GpsActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
             ActivityCompat.requestPermissions(GpsActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
         }
-        Location location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        Location location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);//마지막에 접근한 GPS경로 불러오기
         if (location != null) {
             double latitude = location.getLatitude();
             double longitude = location.getLongitude();
@@ -47,7 +47,7 @@ public class GpsActivity extends AppCompatActivity {
                     ActivityCompat.requestPermissions(GpsActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
                     ActivityCompat.requestPermissions(GpsActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
                 }
-                manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, gpsListener);
+                manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, gpsListener);//GPS리스너 객체에 현재 GPS 위치정보 불러오기, 위치갱생에 필요한 시간1초, 위치갱신에 필요한 이동거리0미터
             }
         });
     }
@@ -57,12 +57,12 @@ public class GpsActivity extends AppCompatActivity {
         public void onLocationChanged(@NonNull Location location) {
             Double latitude = location.getLatitude();
             Double longitude = location.getLongitude();
-            txtGps.setText("최근 위치-> 위도: " + latitude + "\n경도 : " + longitude);
+            txtGps.setText("현재 위치-> 위도: " + latitude + "\n경도 : " + longitude);
         }
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
-
+            //구형 기기에서는 필수
         }
     }
 }
