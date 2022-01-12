@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class ProviderActivity extends AppCompatActivity {
-    //멤버변수 선언
+    //클래스 멤버변수 선언
     ImageView imgSelect;
     File outFile;//저장소 저장된 파일변수
     Uri fileUri;//저장소의 파일 경로
