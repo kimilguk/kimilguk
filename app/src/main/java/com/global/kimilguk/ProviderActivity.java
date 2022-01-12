@@ -90,7 +90,6 @@ public class ProviderActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 102 && resultCode == RESULT_OK) {
-            Log.d("경로", "URI: " + data.getData());
             ContentResolver resolver = getContentResolver();//리졸버 객체생성
             try {
                 //ContentResolver 객체의 openInputStream 메소드로 파일 읽어 들이기
