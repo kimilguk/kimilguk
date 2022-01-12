@@ -1,5 +1,6 @@
 package com.global.kimilguk;
 
+import android.Manifest;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,6 +18,7 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import java.io.IOException;
 
@@ -29,6 +31,8 @@ public class CameraActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+        //주,Android M마시멜로 6버전일때는 수동으로 카메라 권한을 줘야 한다. 누가 7버전 부터는 AutoPermissions 작동되기 때문에 필요없음.
+        ActivityCompat.requestPermissions(CameraActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},0);
         //객체생성
         FrameLayout surfaceFrame = findViewById(R.id.surfaceFrame);
         surfaceView = new CameraSurfaceView(this);

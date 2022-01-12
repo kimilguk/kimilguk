@@ -3,7 +3,6 @@ package com.global.kimilguk;
 import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -91,21 +90,19 @@ public class ProviderActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 102 && resultCode == RESULT_OK) {
-            //주, 누가 7버전 미만에서는 작동하지 않기 때문에 추가 처리를 해 줘야 한다.
-            if(Build.VERSION.SDK_INT < 24) {
-                Uri selectedImage2 = data.getData();
-                String[] filePathColumn2 = {MediaStore.Images.Media.DATA};
-                Cursor cursor2 = getApplicationContext().getContentResolver().query(selectedImage2, filePathColumn2, null, null, null);
-                cursor2.moveToFirst();
-                int columnIndex2 = cursor2.getColumnIndex(filePathColumn2[0]);
-                String filePath = cursor2.getString(columnIndex2);
-                cursor2.close();
-                outFile = new File(filePath);
+            Uri fileUri = data.getData();//카메라 앱에서 선택한 파일명
+            ContentResolver resolver = getContentResolver();//리졸버 객체생성
+            try {
+                //ContentResolver 객체의 openInputStream 메소드로 파일 읽어 들이기
+                InputStream inputStream = resolver.openInputStream(fileUri);
+                BitmapFactory.Options options = new BitmapFactory.Options();//저장할 이미지옵션
+                options.inSampleSize = 8;//이미지 크기를 1/2의8승으로 줄인다.
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream,null,options);//비트맵객체생성
+                imgSelect.setImageBitmap(bitmap);//이미지 뷰에 비트맵 출력
+                inputStream.close();//객체 제거
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            BitmapFactory.Options options = new BitmapFactory.Options();//저장할 이미지옵션
-            options.inSampleSize = 8;//이미지 크기를 1/2의8승으로 줄인다.
-            Bitmap bitmap = BitmapFactory.decodeFile(outFile.getAbsolutePath(), options);//이미지가 저장된다
-            imgSelect.setImageBitmap(bitmap);//이미지 뷰에 비트맵 출력
         }
         if(requestCode == 101) {
             if(resultCode == RESULT_OK) {
@@ -115,7 +112,9 @@ public class ProviderActivity extends AppCompatActivity {
                 try {
                     //ContentResolver 객체의 openInputStream 메소드로 파일 읽어 들이기
                     InputStream inputStream = resolver.openInputStream(fileUri);
-                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);//비트맵객체생성
+                    BitmapFactory.Options options = new BitmapFactory.Options();//저장할 이미지옵션
+                    options.inSampleSize = 8;//이미지 크기를 1/2의8승으로 줄인다.
+                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream,null,options);//비트맵객체생성
                     imgSelect.setImageBitmap(bitmap);//이미지 뷰에 비트맵 출력
                     inputStream.close();//객체 제거
                 } catch (IOException e) {
