@@ -76,9 +76,9 @@ public class PushActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PushActivity.class);
         intent.putExtra("notificationId", 2); //전달할 값
         intent.putExtra("extraString", "입금내용 확인 하였습니다."); //전달할 값
-        //펜딩(보류)인텐트는 메시지를 클릭해서 확인 하는 용도로 사용
+        //펜딩(보류)인텐트는 메시지를 클릭해서 응답확인 하는 용도로 사용
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 109, intent,PendingIntent.FLAG_UPDATE_CURRENT);//펜딩인텐트 객체생성
-        builder.setAutoCancel(true);//빌더에 펜딩인텐트 설정
+        builder.setAutoCancel(true);//알림메시지를 클릭하면 사라짐
         builder.setContentIntent(pendingIntent);
         builder.setContentTitle("은행 입금 알림");
         builder.setTicker("은행알림");
