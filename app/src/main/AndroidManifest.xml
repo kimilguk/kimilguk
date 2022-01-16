@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.global.kimilguk">
+    <uses-permission android:name="android.permission.VIBRATE"/>
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -31,7 +32,7 @@
         android:theme="@style/Theme.Kimilguk"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".GpsActivity"
+            android:name=".PushActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,12 +41,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".GpsActivity"
+            android:exported="true">
+        </activity>
+        <activity
             android:name=".CameraActivity"
             android:exported="false" />
         <activity
             android:name=".ProviderActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <!--
  카메라 앱 사용시간에 캡쳐한 내용을 바로 불러올때 사용하게됨.
         프로바이더 등록, xml폴더에 external.xml 파일 생성
