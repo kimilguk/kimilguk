@@ -25,7 +25,7 @@ public class BluetoothActivity extends AppCompatActivity {
     BluetoothAdapter bluetoothAdapter;
     TextView txtNetwork;
     WiFiReceiver wifiReceiver;
-    Context context;
+    Context context;//getApplicationContext() 대신에 Context를 사용하면 편리
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +33,6 @@ public class BluetoothActivity extends AppCompatActivity {
         //객체 생성
         Button btnNetwork = findViewById(R.id.btnNetwork);
         txtNetwork = findViewById(R.id.txtNetwork);
-        wifiReceiver = new WiFiReceiver();
         btnNetwork.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +63,7 @@ public class BluetoothActivity extends AppCompatActivity {
                     }
                 }
                 //WiFi 연결코딩 시작
+                wifiReceiver = new WiFiReceiver();
                 ConnectivityManager manager = (ConnectivityManager) getSystemService(context.CONNECTIVITY_SERVICE);//시스템의 커넥션 매니저 객체 생성
                 NetworkInfo info = manager.getActiveNetworkInfo();//네트워크 객체 생성
                 if(info != null) {
@@ -73,10 +73,10 @@ public class BluetoothActivity extends AppCompatActivity {
                         filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);//와이파이상태체크
                         //filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);//네트워크상태체크
                         registerReceiver(wifiReceiver, filter);//자바코드에서 리시버 등록하기
+                        txtNetwork.append("와이파이 연결여부: " + info.isConnected() + "\n");//연결여부 확인
                     }else{
                         txtNetwork.setText("기타로 연결됨\n");
                     }
-                    txtNetwork.append("와이파이 연결여부: " + info.isConnected() + "\n");//연결여부 확인
                 }else{
                     txtNetwork.setText("데이터통신 불가\n");
                 }
