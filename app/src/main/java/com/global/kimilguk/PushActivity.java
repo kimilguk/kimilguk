@@ -22,7 +22,7 @@ import androidx.core.app.NotificationCompat;
 
 public class PushActivity extends AppCompatActivity {
     //멤버변수선언
-    NotificationManager manager;
+    NotificationManager manager;//서비스객체로 사용할 변수
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,10 +50,10 @@ public class PushActivity extends AppCompatActivity {
         btnBank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showNotification2();
+                showNotification2();//채널2로 NotificationManager 로 출력할 메소드 생성
             }
         });
-        Bundle extras = getIntent().getExtras();
+        Bundle extras = getIntent().getExtras();//인텐트 반환값 출력
         if(extras != null) {
             int id = extras.getInt("notificationId");
             String extraData = extras.getString("extraString");
@@ -83,7 +83,7 @@ public class PushActivity extends AppCompatActivity {
         builder.setContentTitle("은행 입금 알림");
         builder.setTicker("은행알림");
         builder.setContentText("10000 원 입금 되었습니다.");
-        builder.setSmallIcon(android.R.drawable.ic_menu_view);
+        builder.setSmallIcon(android.R.drawable.ic_dialog_info);
         Notification notification = builder.build();//빌더패턴(방식)이란? 객체를 손쉽게 사용하기위한 목적으로 객체를 조립식으로 만들 수 있게 클래스를 구성하고, build()메소드로 조립한다.
         manager.notify(2, notification);//화면출력
     }
