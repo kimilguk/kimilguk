@@ -1,5 +1,6 @@
 package com.global.kimilguk;
 
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -34,6 +35,7 @@ public class BluetoothActivity extends AppCompatActivity {
         Button btnNetwork = findViewById(R.id.btnNetwork);
         txtNetwork = findViewById(R.id.txtNetwork);
         btnNetwork.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("MissingPermission") //블루투스 어댑터 작동 보안 무시 추가코드필요
             @Override
             public void onClick(View v) {
                 //블루투스 연결코딩 시작
